@@ -53,3 +53,60 @@ body{margin:0;background:#041220;color:#fff}
   box-shadow: 0 12px 24px rgba(0,0,0,0.7); /* sombra más profunda */
   cursor: pointer;
 }
+/* === Menú hamburguesa === */
+.menu-toggle {
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* === Menú lateral === */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* fuera de la pantalla inicialmente */
+  width: 250px;
+  height: 100%;
+  background: #000;
+  color: #00C0FF; /* azul cielo */
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 60px;
+}
+
+.side-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-menu li {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: #00C0FF;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s ease;
+}
+
+.side-menu a:hover {
+  background: rgba(0, 192, 255, 0.1);
+}
+
+/* Cuando está activo (visible) */
+.side-menu.active {
+  left: 0;
+}
+
+/* Adaptación al topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
