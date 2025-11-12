@@ -63,5 +63,21 @@ document.getElementById('search').addEventListener('input', (e)=>{
   MOVIES.filter(m=>m.title.toLowerCase().includes(q)).forEach(m=>gallery.appendChild(createCard(m)));
 });
 </script>
+  <script>
+const menuToggle = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
+
+// abrir/cerrar menú
+menuToggle.addEventListener('click', () => {
+  sideMenu.classList.toggle('active');
+});
+
+// cerrar menú al hacer clic en un enlace
+document.querySelectorAll('#sideMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    sideMenu.classList.remove('active');
+  });
+});
+</script>
 </body>
 </html>
