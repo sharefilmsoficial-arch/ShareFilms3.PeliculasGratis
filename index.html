@@ -69,8 +69,9 @@ document.getElementById('search').addEventListener('input', (e)=>{
 const menuToggle = document.getElementById('menuToggle');
 const sideMenu = document.getElementById('sideMenu');
 
-// abrir/cerrar menú
+// abrir/cerrar menú y animar icono
 menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
   sideMenu.classList.toggle('active');
 });
 
@@ -78,6 +79,7 @@ menuToggle.addEventListener('click', () => {
 document.querySelectorAll('#sideMenu a').forEach(link => {
   link.addEventListener('click', () => {
     sideMenu.classList.remove('active');
+    menuToggle.classList.remove('active');
   });
 });
 </script>
