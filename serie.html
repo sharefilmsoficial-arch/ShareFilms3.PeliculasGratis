@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Serie</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .serie-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 32px;
+    gap: 24px;
+  }
+  .serie-left {
+    flex: 1;
+    min-width: 280px;
+  }
+  .serie-right {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255,255,255,0.03);
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .episode {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .episode:last-child {
+    border-bottom: none;
+  }
+</style>
+</head>
+<body class="movie-page">
+<div id="app">
+  <div class="back-btn"><a href="series.html">← Volver</a></div>
+  <div class="serie-container" id="serieContainer">
+    <div class="serie-left" id="serieLeft"></div>
+    <div class="serie-right" id="serieRight"></div>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+
+// Reusar las series del archivo anterior
+const SERIES = JSON.parse(localStorage.getItem('seriesData')) || [];
+
+function getSerie(id){
+  return SERIES.find(s => s.id === id);
+}
+
+const serie = getSerie(id);
+if(!serie){
+  document.body.innerHTML = '<p>Serie no encontrada. <a href="series.html">Volver</a></p>';
+  throw new Error('Serie no encontrada');
+}
+
+// Mostrar imagen y título
+document.getElementById('serieLeft').innerHTML = `
+  <img src="${serie.image}" alt="${serie.title}" style="width:100%;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.5)">
+  <h1>${serie.title}</h1>
+`;
+
+// Mostrar lista de episodios
+serie.episodes.sort((a,b)=>a.n - b.n);
+const right = document.getElementById('serieRight');
+right.innerHTML = '<h2>Episodios</h2>' + serie.episodes.map(ep => `
+  <div class="episode">
+    <strong>${ep.name}</strong>
+  </div>
+`).join('');
+</script>
+</body>
+</html>
