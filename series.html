@@ -83,6 +83,9 @@ const SERIES = [
   }
 ];
 
+/* Guarda las series en localStorage */
+localStorage.setItem('seriesData', JSON.stringify(SERIES));
+
 // Crear tarjetas de series
 const gallery = document.getElementById('seriesGallery');
 function createSeriesCard(serie){
