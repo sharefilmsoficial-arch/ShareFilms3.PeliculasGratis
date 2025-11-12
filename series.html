@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Series - Share Films</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="logo">ShareFilms</div>
+  <input id="search" placeholder="Buscar series..." />
+</header>
+
+<nav class="side-menu" id="sideMenu">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="#">Comedia</a></li>
+    <li><a href="#">Terror</a></li>
+    <li><a href="#">Acción</a></li>
+    <li><a href="#">Más Recientes</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section class="gallery" id="seriesGallery"></section>
+</main>
+
+<script src="movies.js"></script>
+<script>
+/* Ejemplo de series */
+const SERIES = [
+  {
+    id: "whatif1",
+    title: "What If...? Temporada 1",
+    image: "https://m.media-amazon.com/images/I/81mG6rYc5pL._AC_SL1500_.jpg",
+    episodes: [
+      { n: 1, name: "Episodio 1 - ¿Qué pasaría si el Capitán Carter fuera el primer vengador?" },
+      { n: 2, name: "Episodio 2 - ¿Qué pasaría si T’Challa se convirtiera en Star-Lord?" },
+      { n: 3, name: "Episodio 3 - Los Vengadores caen" },
+      { n: 4, name: "Episodio 4 - Doctor Strange pierde su corazón" },
+      { n: 5, name: "Episodio 5 - ¿Qué pasaría si hubiera zombis?" },
+      { n: 6, name: "Episodio 6 - Killmonger rescata a Tony Stark" },
+      { n: 7, name: "Episodio 7 - Thor el fiestero" },
+      { n: 8, name: "Episodio 8 - Ultron gana" },
+      { n: 9, name: "Episodio 9 - El Vigilante interviene" }
+    ]
+  },
+  {
+    id: "whatif2",
+    title: "What If...? Temporada 2",
+    image: "https://m.media-amazon.com/images/I/91y5hlqH6LL._AC_SL1500_.jpg",
+    episodes: [
+      { n: 1, name: "Episodio 1 - Nebula se une a la Nova Corps" },
+      { n: 2, name: "Episodio 2 - Peter Quill ataca la Tierra" },
+      { n: 3, name: "Episodio 3 - Happy Hogan salva la Navidad" },
+      { n: 4, name: "Episodio 4 - Iron Man en Sakaar" },
+      { n: 5, name: "Episodio 5 - Capitán Carter lucha contra Hydra Stomper" },
+      { n: 6, name: "Episodio 6 - Hela, la Diosa de la Muerte" },
+      { n: 7, name: "Episodio 7 - El Capitán Steve Rogers del Siglo XIX" },
+      { n: 8, name: "Episodio 8 - Strange Supremo vs. El Vigilante" },
+      { n: 9, name: "Episodio 9 - Batalla del Multiverso" }
+    ]
+  },
+  {
+    id: "sevenscissors3",
+    title: "Seven Scissors Temporada 3",
+    image: "https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/07/seven-deadly-sins-4.jpg",
+    episodes: [
+      { n: 1, name: "Episodio 1 - Renacimiento" },
+      { n: 2, name: "Episodio 2 - Lazos rotos" },
+      { n: 3, name: "Episodio 3 - Pecados vs Ángeles" },
+      { n: 4, name: "Episodio 4 - La promesa" },
+      { n: 5, name: "Episodio 5 - Luz y oscuridad" }
+    ]
+  }
+];
+
+// Crear tarjetas de series
+const gallery = document.getElementById('seriesGallery');
+function createSeriesCard(serie){
+  const a = document.createElement('a');
+  a.className = 'card-link';
+  a.href = `serie.html?id=${serie.id}`;
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.backgroundImage = `url(${serie.image})`;
+  const info = document.createElement('div');
+  info.className = 'card-info';
+  info.innerHTML = `<h3>${serie.title}</h3>`;
+  card.appendChild(info);
+  a.appendChild(card);
+  return a;
+}
+
+SERIES.forEach(s => gallery.appendChild(createSeriesCard(s)));
+
+// Buscador
+document.getElementById('search').addEventListener('input', (e)=>{
+  const q = e.target.value.toLowerCase();
+  gallery.innerHTML = '';
+  SERIES.filter(s=>s.title.toLowerCase().includes(q))
+        .forEach(s=>gallery.appendChild(createSeriesCard(s)));
+});
+
+// Menú hamburguesa
+const menuToggle = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  sideMenu.classList.toggle('active');
+});
+document.querySelectorAll('#sideMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    sideMenu.classList.remove('active');
+    menuToggle.classList.remove('active');
+  });
+});
+</script>
+</body>
+</html>
