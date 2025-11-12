@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Movie</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="movie-page">
+<div id="app">
+  <div class="back-btn"><a href="index.html">← Volver</a></div>
+  <div class="movie-hero" id="hero">
+    <div id="videoContainer">
+      <video id="bgVideo" autoplay muted loop playsinline></video>
+    </div>
+    <div class="overlay"></div>
+    <div class="controls">
+      <h1 id="title"></h1>
+      <p id="meta"></p>
+      <div class="action-row">
+        <button id="playMovie" class="big">Reproducir película</button>
+        <div class="small-controls">
+          <button id="likeBtn" class="icon">👍 <span id="likeCount">0</span></button>
+          <button id="dislikeBtn" class="icon">👎 <span id="dislikeCount">0</span></button>
+          <button id="playTrailerBtn" class="icon">▶Tráiler</button>
+          <button id="toggleMute" class="icon">🔇</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="movies.js"></script>
+<script>
+/* user id */
+const userId = localStorage.getItem("sf_user_id") || ('u_' + Math.random().toString(36).slice(2));
+localStorage.setItem("sf_user_id", userId);
+
+function qs(q){return document.querySelector(q);}
+function qsa(q){return document.querySelectorAll(q);}
+
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const movie = MOVIES.find(m=>m.id===id);
+if(!movie){
+  document.body.innerHTML = '<p>Pelicula no encontrada. <a href="index.html">Volver</a></p>';
+  throw new Error('Movie not found');
+}
+
+qs('#title').textContent = movie.title;
+qs('#meta').textContent = `${movie.year || ''} • ${movie.duration || ''} • ${movie.rating || ''}`;
+
+// 🎬 Reproducir tráiler como fondo con control de sonido
+const hero = qs('#hero');
+const bg = qs('#bgVideo');
+const toggleMute = qs('#toggleMute');
+
+if (movie.trailerUrl) {
+  // 🎬 Si es un archivo de video normal (.mp4, .webm, etc.)
+  bg.src = movie.trailerUrl;
+  bg.loop = true;
+  bg.muted = true;
+  bg.autoplay = true;
+  bg.playsInline = true;
+  bg.style.objectFit = "cover";
+  bg.style.width = "100%";
+  bg.style.height = "100%";
+  bg.load();
+  bg.play().catch(() => {});
+} else {
+  hero.classList.add('no-video');
+}
+
+// 🔇 Botón de mute/unmute
+toggleMute.addEventListener('click', () => {
+  if (bg.muted) {
+    bg.muted = false;
+    toggleMute.textContent = '🔊';
+  } else {
+    bg.muted = true;
+    toggleMute.textContent = '🔇';
+  }
+});
+
+// ▶ Reproducir película
+qs('#playMovie').addEventListener('click', ()=>{
+  if(movie.movie && movie.movie.startsWith('http')){
+    window.open(movie.movie, '_blank');
+  } else {
+    alert('Enlace de la película no disponible.');
+  }
+});
+
+/// 👍👎 Likes y dislikes
+const likeBtn = qs('#likeBtn');
+const dislikeBtn = qs('#dislikeBtn');
+const likeCountEl = qs('#likeCount');
+const dislikeCountEl = qs('#dislikeCount');
+
+let state = { userVote: 0 }; // 1=like, -1=dislike, 0=none
+
+async function fetchVotes(){
+  try{
+    const res = await fetch(`api/get_votes.php?id=${movie.id}`);
+    const data = await res.json();
+    likeCountEl.textContent = data.likes || 0;
+    dislikeCountEl.textContent = data.dislikes || 0;
+    // get user's vote
+    const r2 = await fetch(`api/get_user_vote.php?id=${movie.id}&user=${userId}`);
+    const uv = await r2.json();
+    state.userVote = uv.vote || 0;
+    applyVoteVisual();
+  }catch(e){
+    console.error(e);
+  }
+}
+function applyVoteVisual(){
+  if(state.userVote===1){ likeBtn.classList.add('active'); dislikeBtn.classList.remove('active'); }
+  else if(state.userVote===-1){ dislikeBtn.classList.add('active'); likeBtn.classList.remove('active'); }
+  else { likeBtn.classList.remove('active'); dislikeBtn.classList.remove('active'); }
+}
+async function sendVote(vote){
+  try{
+    const res = await fetch('api/vote.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ movie_id: movie.id, user: userId, vote })
+    });
+    const data = await res.json();
+    likeCountEl.textContent = data.likes;
+    dislikeCountEl.textContent = data.dislikes;
+    state.userVote = vote;
+    applyVoteVisual();
+  }catch(e){ console.error(e); }
+}
+likeBtn.addEventListener('click', ()=>{ state.userVote===1 ? sendVote(0) : sendVote(1); });
+dislikeBtn.addEventListener('click', ()=>{ state.userVote===-1 ? sendVote(0) : sendVote(-1); });
+
+fetchVotes();
+</script>
+
+<hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:20px 32px;">
+<section class="comments" id="commentsSection" style="padding:0 32px 40px;max-width:900px">
+  <h2>Comentarios</h2>
+  <div id="commentsList" aria-live="polite"></div>
+  <div style="margin-top:12px">
+    <input id="commentName" placeholder="Tu nombre (opcional)" style="padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);width:40%;margin-right:8px" />
+    <textarea id="commentText" placeholder="Deja un comentario..." style="width:100%;min-height:72px;margin-top:8px;padding:10px;border-radius:6px;border:1px solid rgba(255,255,255,0.06)"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button id="submitComment" class="big">Comentar</button>
+      <button id="clearComments" class="icon">🧹 Limpiar</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const commentsList = document.getElementById('commentsList');
+const commentName = document.getElementById('commentName');
+const commentText = document.getElementById('commentText');
+const submitComment = document.getElementById('submitComment');
+const clearComments = document.getElementById('clearComments');
+
+commentName.value = localStorage.getItem('sf_user_name') || '';
+
+async function loadComments(){
+  try{
+    const res = await fetch(`api/get_comments.php?id=${movie.id}`);
+    const data = await res.json();
+    commentsList.innerHTML = '';
+    if(!data || data.length===0){
+      commentsList.innerHTML = '<p style="opacity:0.7">Sin comentarios. Sé el primero.</p>';
+      return;
+    }
+    data.forEach(c=>{
+      const el = document.createElement('div');
+      el.className = 'comment';
+      el.style.padding='8px 12px';
+      el.style.borderRadius='8px';
+      el.style.marginBottom='8px';
+      el.style.background='rgba(255,255,255,0.02)';
+      el.innerHTML = `<strong>${escapeHtml(c.name || 'Anónimo')}</strong> <span style="opacity:0.6;font-size:12px;margin-left:8px">${escapeHtml(c.created_at)}</span><div style="margin-top:6px">${escapeHtml(c.text)}</div>`;
+      commentsList.appendChild(el);
+    });
+  }catch(e){ console.error(e); }
+}
+function escapeHtml(s){ if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+submitComment.addEventListener('click', async ()=>{
+  const name = commentName.value.trim();
+  const text = commentText.value.trim();
+  if(!text){ alert('Escribe un comentario'); return; }
+  localStorage.setItem('sf_user_name', name);
+  try{
+    const res = await fetch('api/add_comment.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({movie_id: movie.id, name, text})
+    });
+    const data = await res.json();
+    if(data.success){ commentText.value=''; loadComments(); }
+    else { alert('No se pudo guardar el comentario'); }
+  }catch(e){ console.error(e); alert('Error al enviar'); }
+});
+
+clearComments.addEventListener('click', async ()=>{
+  if(!confirm('¿Eliminar todos los comentarios de esta película? (solo recomendado para pruebas)')) return;
+  try{
+    const res = await fetch('api/clear_comments.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({movie_id: movie.id})
+    });
+    const data = await res.json();
+    if(data.success) loadComments();
+  }catch(e){ console.error(e); }
+});
+
+loadComments();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+*{box-sizing:border-box;font-family:Inter, Poppins, Arial, sans-serif}
+body{margin:0;background:#041220;color:#fff}
+.topbar{display:flex;align-items:center;gap:20px;padding:12px 24px;background:#071223;position:sticky;top:0;z-index:5}
+.logo{font-weight:700;color:#58a6ff}
+#search{flex:1;padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:#0b1b26;color:#fff}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;padding:28px}
+.card-link{display:block;text-decoration:none;color:inherit}
+.card{height:300px;border-radius:8px;background-size:cover;background-position:center;position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.6)}
+.card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(transparent,rgba(2,8,15,0.9))}
+.card-info{position:absolute;left:12px;bottom:12px}
+.card-info h3{margin:0;font-size:16px}
+.movie-page .back-btn{padding:12px}
+.movie-hero{position:relative;height:70vh;display:flex;align-items:flex-end}
+.movie-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.movie-hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,15,0.3),rgba(2,8,15,0.9))}
+.movie-hero .controls{position:relative;padding:32px;z-index:2;max-width:900px}
+.movie-hero h1{font-size:44px;margin:0 0 8px}
+.action-row{display:flex;gap:16px;align-items:center;margin-top:12px}
+.big{padding:14px 22px;border-radius:10px;border:none;background:#2b6be6;color:#fff;font-weight:600;cursor:pointer}
+.icon{padding:10px 12px;border-radius:8px;border:none;background:rgba(255,255,255,0.06);cursor:pointer}
+.icon.active{background:#2b6be6}
+.small-controls{display:flex;gap:8px;align-items:center}
+.no-video video{display:none}
+
+
+.comments h2{margin:10px 0 12px;font-size:20px}
+.comment small{opacity:0.6}
+/*color del boton*/
+.back-btn a {
+  color: #00C0FF;
+  text-decoration: none; /* opcional: quita el subrayado */
+  font-weight: 500;      /* opcional: un poco más visible */
+}
+
+.back-btn a:hover {
+  text-decoration: underline; /* opcional: efecto al pasar el mouse */
+}
