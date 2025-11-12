@@ -35,3 +35,21 @@ body{margin:0;background:#041220;color:#fff}
 .back-btn a:hover {
   text-decoration: underline; /* opcional: efecto al pasar el mouse */
 }
+/* ==== Efecto de elevación en las tarjetas ==== */
+.card {
+  height: 300px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transición suave */
+}
+
+/* Cuando el usuario pasa el mouse */
+.card:hover {
+  transform: translateY(-10px) scale(1.03); /* se eleva y crece ligeramente */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.7); /* sombra más profunda */
+  cursor: pointer;
+}
