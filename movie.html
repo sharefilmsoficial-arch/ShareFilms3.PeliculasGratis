@@ -50,27 +50,15 @@ if(!movie){
 qs('#title').textContent = movie.title;
 qs('#meta').textContent = `${movie.year || ''} • ${movie.duration || ''} • ${movie.rating || ''}`;
 
-// 🎬 Reproducir tráiler como fondo con control de sonido
+// 🎬 Imagen estática de fondo (sin tráiler)
 const hero = qs('#hero');
-const bg = qs('#bgVideo');
-const toggleMute = qs('#toggleMute');
-
-if (movie.trailerUrl) {
-  // 🎬 Si es un archivo de video normal (.mp4, .webm, etc.)
-  bg.src = movie.trailerUrl;
-  bg.loop = true;
-  bg.muted = true;
-  bg.autoplay = true;
-  bg.playsInline = true;
-  bg.style.objectFit = "cover";
-  bg.style.width = "100%";
-  bg.style.height = "100%";
-  bg.load();
-  bg.play().catch(() => {});
+if (movie.image) {
+  hero.style.backgroundImage = `url(${movie.image})`;
+  hero.style.backgroundSize = "cover";
+  hero.style.backgroundPosition = "center";
 } else {
   hero.classList.add('no-video');
 }
-
 // 🔇 Botón de mute/unmute
 toggleMute.addEventListener('click', () => {
   if (bg.muted) {
