@@ -269,3 +269,17 @@ body {
   align-items: center;
   gap: 16px;
 }
+html {
+  scroll-behavior: smooth; /* desplazamiento suave */
+}
+
+.card {
+  will-change: transform; /* optimiza animación */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
