@@ -181,7 +181,7 @@ const MOVIES = [
     genres: ["Ciencia ficción", "Aventura"],
     description: "En un exuberante planeta llamado Pandora viven los Na'vi, seres que aparentan ser primitivos pero que en realidad son muy evolucionados. Debido a que el ambiente de Pandora es venenoso, los híbridos humanos/Na'vi, llamados Avatares, están relacionados con las mentes humanas, lo que les permite moverse libremente por Pandora. Jake Sully, un exinfante de marina paralítico se transforma a través de un Avatar, y se enamora de una mujer Na'vi..",
     trailerUrl: sampleTrailer,
-    image: "images/avatar.jpg",
+    image: "images/avatar.jpeg",
     movie: "https://drive.google.com/file/d/16JSSJ3zfvpZGG7zNGXqZ2DicCFyqrfGU/preview"
   },
   {
@@ -191,10 +191,9 @@ const MOVIES = [
     duration: "3h 12min",
     rating: "PG-13",
     genres: ["Ciencia ficción", "Aventura"],
-    description:
-      "Jake Sully y Neytiri deben proteger a su familia de nuevas amenazas en Pandora mientras exploran las profundidades oceánicas del planeta.",
+    description: "Jake Sully y Neytiri deben proteger a su familia de nuevas amenazas en Pandora mientras exploran las profundidades oceánicas del planeta.",
     trailerUrl: sampleTrailer,
-    image: "https://apeiros173.github.io/ShareFilms-Peliculas-Gratis/avatar2.jpeg",
+    image: "images/avatar2.jpeg",
     movie: "https://drive.google.com/file/d/12RRSn0kLKUea3RbJlg32Z7zLZE7v__B5/preview"
   },
   {
