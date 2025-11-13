@@ -8,11 +8,7 @@
 </head>
 <body>
 <header class="topbar">
-  <div class="menu-toggle" id="menuToggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
   <div class="logo">ShareFilms</div>
   <input id="search" placeholder="Buscar series..." />
 </header>
@@ -32,24 +28,17 @@
   <section class="gallery" id="seriesGallery"></section>
 </main>
 
-<script src="movies.js"></script>
 <script>
-/* Ejemplo de series */
+/* === SERIES === */
 const SERIES = [
   {
     id: "whatif1",
     title: "What If...? Temporada 1",
     image: "series/What-If-TP1.webp",
     episodes: [
-      { id:"episode-1", n: 1, name: "Episodio 1 - ¿Qué pasaría si el Capitán Carter fuera el primer vengador?", thumb: "series/What-If-TP2-EP1.WEBP" },
-      { id:"episode-2", n: 2, name: "Episodio 2 - ¿Qué pasaría si T’Challa se convirtiera en Star-Lord?", thumb: "series/What-If-TP2-EP2.WEBP" },
-      { id:"episode-3", n: 3, name: "Episodio 3 - Los Vengadores caen", thumb: "series/What-If-TP2-EP3.WEBP" },
-      { id:"episode-4", n: 4, name: "Episodio 4 - Doctor Strange pierde su corazón", thumb: "series/What-If-TP2-EP4.WEBP" },
-      { id:"episode-5", n: 5, name: "Episodio 5 - ¿Qué pasaría si hubiera zombis?", thumb: "series/What-If-TP2-EP5.WEBP" },
-      { id:"episode-6", n: 6, name: "Episodio 6 - Killmonger rescata a Tony Stark", thumb: "series/What-If-TP2-EP6.WEBP" },
-      { id:"episode-7", n: 7, name: "Episodio 7 - Thor el fiestero" , thumb: "series/What-If-TP2-EP7.WEBP"},
-      { id:"episode-8", n: 8, name: "Episodio 8 - Ultron gana", thumb: "series/What-If-TP2-EP8.WEBP" },
-      { id:"episode-9", n: 9, name: "Episodio 9 - El Vigilante interviene", thumb: "series/What-If-TP2-EP9.WEBP" }
+      { n: 1, name: "¿Qué pasaría si el Capitán Carter fuera el primer vengador?", thumb: "series/What-If-TP1-EP1.webp", drive: "#" },
+      { n: 2, name: "¿Qué pasaría si T'Challa se convirtiera en Star-Lord?", thumb: "series/What-If-TP1-EP2.webp", drive: "#" },
+      { n: 3, name: "¿Qué pasaría si el mundo perdiera a sus héroes más poderosos?", thumb: "series/What-If-TP1-EP3.webp", drive: "#" }
     ]
   },
   {
@@ -57,35 +46,19 @@ const SERIES = [
     title: "What If...? Temporada 2",
     image: "series/What-If-TP2.webp",
     episodes: [
-      { id:"episode-1", n: 1, name: "Episodio 1 - Nebula se une a la Nova Corps", thumb: "series/What-If-TP2-EP1.webp" },
-      { id:"episode-2", n: 2, name: "Episodio 2 - Peter Quill ataca la Tierra", thumb: "series/What-If-TP2-EP2.webp" },
-      { id:"episode-3", n: 3, name: "Episodio 3 - Happy Hogan salva la Navidad", thumb: "series/What-If-TP2-EP3.webp" },
-      { id:"episode-4", n: 4, name: "Episodio 4 - Iron Man en Sakaar", thumb: "series/What-If-TP2-EP4.webp" },
-      { id:"episode-5", n: 5, name: "Episodio 5 - Capitán Carter lucha contra Hydra Stomper", thumb: "series/What-If-TP2-EP5.webp" },
-      { id:"episode-6", n: 6, name: "Episodio 6 - Hela, la Diosa de la Muerte", thumb: "series/What-If-TP2-EP6.webp" },
-      { id:"episode-7", n: 7, name: "Episodio 7 - El Capitán Steve Rogers del Siglo XIX", thumb: "series/What-If-TP2-EP7.webp" },
-      { id:"episode-8", n: 8, name: "Episodio 8 - Strange Supremo vs. El Vigilante", thumb: "series/What-If-TP2-EP8.webp" },
-      { id:"episode-9", n: 9, name: "Episodio 9 - Batalla del Multiverso", thumb: "series/What-If-TP2-EP9.webp" }
-    ]
-  },
-  {
-    id: "scissors-seven-3",
-    title: "Scissors Seven Temporada 3",
-    image: "https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/07/seven-deadly-sins-4.jpg",
-    episodes: [
-      { id:"episode-1", n: 1, name: "Episodio 1 - Renacimiento", thumb: "series/seven/ep2.webp" },
-      { id:"episode-2", n: 2, name: "Episodio 2 - Lazos rotos", thumb: "series/seven/ep2.webp" },
-      { id:"episode-3", n: 3, name: "Episodio 3 - Pecados vs Ángeles", thumb: "series/seven/ep3.webp" },
-      {id:"episode-4",  n: 4, name: "Episodio 4 - La promesa", thumb: "series/seven/ep4.webp" },
-      { id:"episode-5", n: 5, name: "Episodio 5 - Luz y oscuridad", thumb: "series/seven/ep5.webp" }
+      { n: 1, name: "Nebula se une a la Nova Corps", thumb: "series/What-If-TP2-EP1.webp", drive: "#" },
+      { n: 2, name: "Peter Quill ataca la Tierra", thumb: "series/What-If-TP2-EP2.webp", drive: "#" },
+      { n: 3, name: "Happy Hogan salva la Navidad", thumb: "series/What-If-TP2-EP3.webp", drive: "#" },
+      { n: 4, name: "Tony Stark en Sakaar", thumb: "series/What-If-TP2-EP4.webp", drive: "#" },
+      { n: 5, name: "El nacimiento de Strange Supreme", thumb: "series/What-If-TP2-EP5.webp", drive: "#" }
     ]
   }
 ];
 
-/* Guarda las series en localStorage */
+/* Guarda en localStorage */
 localStorage.setItem('seriesData', JSON.stringify(SERIES));
 
-// Crear tarjetas de series
+/* Genera tarjetas */
 const gallery = document.getElementById('seriesGallery');
 function createSeriesCard(serie){
   const a = document.createElement('a');
@@ -101,10 +74,9 @@ function createSeriesCard(serie){
   a.appendChild(card);
   return a;
 }
-
 SERIES.forEach(s => gallery.appendChild(createSeriesCard(s)));
 
-// Buscador
+/* Buscador */
 document.getElementById('search').addEventListener('input', (e)=>{
   const q = e.target.value.toLowerCase();
   gallery.innerHTML = '';
@@ -112,7 +84,7 @@ document.getElementById('search').addEventListener('input', (e)=>{
         .forEach(s=>gallery.appendChild(createSeriesCard(s)));
 });
 
-// Menú hamburguesa
+/* Menú hamburguesa */
 const menuToggle = document.getElementById('menuToggle');
 const sideMenu = document.getElementById('sideMenu');
 menuToggle.addEventListener('click', () => {
