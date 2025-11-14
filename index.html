@@ -30,6 +30,7 @@
 </nav>
 <main>
   <section class="gallery" id="gallery"></section>
+  <section class="gallery" id="recentSection" style="display:none;"></section>
 </main>
 
 <script src="movies.js"></script>
@@ -80,6 +81,41 @@ document.querySelectorAll('#sideMenu a').forEach(link => {
   link.addEventListener('click', () => {
     sideMenu.classList.remove('active');
     menuToggle.classList.remove('active');
+  });
+});
+    
+</script>
+  <script>
+// Obtener enlace de "Más Recientes" (6to enlace del menú)
+const recentLink = document.querySelector('#sideMenu a:nth-child(6)');
+const recentSection = document.getElementById('recentSection');
+const mainGallery = document.getElementById('gallery');
+
+// Cuando se hace clic en MÁS RECIENTES
+recentLink.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  // Ocultar galería principal
+  mainGallery.style.display = "none";
+
+  // Mostrar sección recientes
+  recentSection.style.display = "grid";
+  recentSection.innerHTML = ""; // limpiar
+
+  // Filtrar películas 2022–2025
+  const recentMovies = MOVIES.filter(m => m.year >= 2022 && m.year <= 2025);
+
+  // Crear tarjetas igual que las normales
+  recentMovies.forEach(m => {
+    recentSection.appendChild(createCard(m));
+  });
+});
+
+// Ocultar sección recientes al seleccionar cualquier otro enlace
+document.querySelectorAll('#sideMenu a:not(:nth-child(6))').forEach(link => {
+  link.addEventListener('click', () => {
+    recentSection.style.display = "none";   // ocultar recientes
+    mainGallery.style.display = "grid";     // mostrar la galería normal
   });
 });
 </script>
