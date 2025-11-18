@@ -331,7 +331,7 @@ const MOVIES = [
   },
   {
     id: "miraculous-awakening",
-    title: "Próximamente",
+    title: "Miraculous Awakenig",
     year: 2023,
     duration: "1h 39min",
     rating: "PG-",
@@ -339,7 +339,7 @@ const MOVIES = [
     description:"Un guardián de joyas mágicas convierte a una chica peculiar y a un chico popular en superhéroes. No obstante, jamás podrán revelar su verdadera identidad, ni siquiera el uno al otro.",
     trailerUrl: sampleTrailer,
     image: "images/miraculous-awakening.jpg",
-    movie: "aun no"
+    movie: "https://drive.google.com/file/d/1LxopTMByDv1hArzUF0mnjodfHOoHJx4h/preview"
   },
   {
     id: "sonic-the-hedgehog",
