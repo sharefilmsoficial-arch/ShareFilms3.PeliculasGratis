@@ -29,8 +29,8 @@ const MOVIES = [
   },
   {
     id: "beyond-into-the-spiderverse",
-    title: "Spider-Man 3 Proximamente: Beyond into the spiderverse",
-    year: 2023,
+    title: "Spider-Man 3 Proximamente[2027]: Beyond into the spiderverse",
+    year: 2027,
     duration: "2h 20min 05s",
     rating: "PG",
     genres: ["Animación", "Acción", "Aventura", "Superhéroes"],
