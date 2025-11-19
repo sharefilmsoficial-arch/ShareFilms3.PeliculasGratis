@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="topbar">
-  <!-- Botón hamburguesa -->
   <div class="menu-toggle" id="menuToggle">
     <span></span>
     <span></span>
@@ -17,7 +17,7 @@
   <div class="logo">ShareFilms</div>
   <input id="search" placeholder="Buscar películas..." />
 </header>
-<!-- Menú lateral -->
+
 <nav class="side-menu" id="sideMenu">
   <ul>
     <li><a href="index.html">Inicio</a></li>
@@ -28,73 +28,86 @@
     <li><a href="#">Más Recientes</a></li>
   </ul>
 </nav>
+
 <main>
   <section class="gallery" id="gallery"></section>
   <section class="gallery" id="recentSection" style="display:none;"></section>
 </main>
 
 <script src="movies.js"></script>
+
 <script>
-/* Generate user id */
+// Generar user ID
 if (!localStorage.getItem("sf_user_id")) {
   localStorage.setItem("sf_user_id", 'u_' + Math.random().toString(36).slice(2));
 }
 const userId = localStorage.getItem("sf_user_id");
 </script>
+
 <script>
+// --- Galería ---
 const gallery = document.getElementById('gallery');
+
 function createCard(movie){
   const a = document.createElement('a');
   a.className = 'card-link';
   a.href = `movie.html?id=${movie.id}`;
+
   const card = document.createElement('div');
   card.className = 'card';
   card.style.backgroundImage = `url(${movie.image})`;
+
   const info = document.createElement('div');
   info.className = 'card-info';
   info.innerHTML = `<h3>${movie.title}</h3><p>${movie.year || ''} • ${movie.duration || ''}</p>`;
+
   card.appendChild(info);
   a.appendChild(card);
   return a;
 }
-MOVIES.forEach(m=>{
-  gallery.appendChild(createCard(m));
-});
-document.getElementById('search').addEventListener('input', (e)=>{
+
+MOVIES.forEach(m => gallery.appendChild(createCard(m)));
+
+document.getElementById('search').addEventListener('input', e => {
   const q = e.target.value.toLowerCase();
   gallery.innerHTML = '';
-  MOVIES.filter(m=>m.title.toLowerCase().includes(q)).forEach(m=>gallery.appendChild(createCard(m)));
+  MOVIES.filter(m => m.title.toLowerCase().includes(q))
+        .forEach(m => gallery.appendChild(createCard(m)));
 });
 </script>
-  <script>
+
+<script>
+// --- Menú hamburguesa ---
 const menuToggle = document.getElementById('menuToggle');
 const sideMenu = document.getElementById('sideMenu');
 
-// abrir/cerrar menú y animar icono
+// Abrir/cerrar menú
 menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('active');
   sideMenu.classList.toggle('active');
 });
 
-// cerrar menú al hacer clic en un enlace
+// Cerrar menú al hacer clic en un enlace
 document.querySelectorAll('#sideMenu a').forEach(link => {
   link.addEventListener('click', () => {
     sideMenu.classList.remove('active');
     menuToggle.classList.remove('active');
   });
 });
-    
-</script>
-  <script>
-// SIN SELECTORES DEL 6TO ENLACE
-// SOLO CIERRA EL MENÚ AL HACER CLIC EN CUALQUIER ENLACE
 
-document.querySelectorAll('#sideMenu a').forEach(link => {
-  link.addEventListener('click', () => {
+// Cerrar menú al hacer clic fuera
+document.addEventListener('click', (e) => {
+  const isClickInsideMenu = sideMenu.contains(e.target);
+  const isClickToggle = menuToggle.contains(e.target);
+
+  if (sideMenu.classList.contains('active') &&
+      !isClickInsideMenu &&
+      !isClickToggle) {
     sideMenu.classList.remove('active');
     menuToggle.classList.remove('active');
-  });
+  }
 });
 </script>
+
 </body>
 </html>
