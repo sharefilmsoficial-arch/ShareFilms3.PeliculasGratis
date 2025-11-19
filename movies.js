@@ -198,8 +198,8 @@ const MOVIES = [
   },
   {
     id: "avatar3-fireandash",
-    title: "Avatar 3 Próximamente (2026) - El Camino del Agua",
-    year: 2025,
+    title: "Avatar 3 Próximamente (2026) - Fuego y Cenizas",
+    year: 2026,
     duration: "3h 12min",
     rating: "PG-13",
     genres: ["Ciencia ficción", "Aventura"],
