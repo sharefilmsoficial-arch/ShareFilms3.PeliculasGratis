@@ -21,9 +21,10 @@ body {
   z-index: 5;
 }
 
-.logo {
-  font-weight: 700;
-  color: #58a6ff;
+.logo img {
+  height: 40px; /* antes podía medir +100px */
+  width: auto;
+  object-fit: contain;
 }
 
 #search {
