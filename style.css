@@ -22,9 +22,12 @@ body {
 }
 
 .logo img {
-  height: 10px; /* antes podía medir +100px */
-  width: auto;
-  object-fit: contain;
+  height: 50px;       /* tamaño final visible */
+  width: 50px; 
+  object-fit: cover;  /* recorta visualmente */
+  object-position: center;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 #search {
