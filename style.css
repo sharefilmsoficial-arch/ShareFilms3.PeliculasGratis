@@ -22,8 +22,8 @@ body {
 }
 
 .logo {
-  max-width: 12px;
-  height: auto;
+  font-weight: 700;
+  color: #58a6ff;
 }
 
 #search {
