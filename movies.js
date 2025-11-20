@@ -1,6 +1,6 @@
 // movies.js — versión corregida compatible con index.html
 
-const sampleTrailer = "https://www.w3schools.com/html/mov_bbb.mp4"; // Tráiler genérico temporal
+const sampleTrailer = "https://www.w3schools.com/html/mov_bbb"; // Tráiler genérico temporal
 
 const MOVIES = [
   {
