@@ -1,5 +1,6 @@
 // movies.js — versión corregida compatible con index.html
 
+const sampleTrailer = "https://www.w3schools.com/html/mov_bbb.mp4"; // Tráiler genérico temporal
 
 const MOVIES = [
   {
@@ -312,7 +313,7 @@ const MOVIES = [
     rating: "TV-G",
     genres: ["Animación", "Aventura","Infantil","Acción","Fantasía"],
     description:"Marinette, ahora Chronobug, se une a Bunnyx para enfrentarse a un oponente misterioso que viaja en el tiempo...¡y que conoce la identidad secreta de Ladybug!",
-    trailerUrl: "images/miraculous-londres",
+    trailerUrl: sampleTrailer,
     image: "images/miraculous-world4.jpg",
     movie: "https://drive.google.com/file/d/1lj_1bQM62XxUqEG9_taRrZcnaGg9cldN/preview"
   },
