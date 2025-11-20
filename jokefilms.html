@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>JokeFilm</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { background: #041220; color: #fff; text-align: center; padding: 40px; }
+.poster { max-width: 90%; border-radius: 10px; margin-bottom: 20px; }
+.play-btn {
+  padding: 14px 22px;
+  background: #2b6be6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.play-btn:hover { background: #478aff; }
+</style>
+</head>
+<body>
+<div class="back-btn"><a href="jokefilms.html">← Volver</a></div>
+
+<div id="jokeContainer"></div>
+
+<script>
+const jokes = JSON.parse(localStorage.getItem('jokeFilmsData')) || [];
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const movie = jokes.find(m => m.id === id);
+
+if (!movie) {
+  document.body.innerHTML = '<p>Película no encontrada. <a href="jokefilms.html">Volver</a></p>';
+  throw new Error("Película no encontrada");
+}
+
+document.getElementById('jokeContainer').innerHTML = `
+  <h1>${movie.title}</h1>
+  <img src="${movie.image}" class="poster">
+  <p>${movie.year} • ${movie.duration} • ${movie.rating}</p>
+  <p style="max-width:600px;margin:auto;opacity:.8;">${movie.description}</p>
+  <br>
+  <button class="play-btn" onclick="window.open('${movie.video}', '_blank')">▶ Reproducir</button>
+`;
+</script>
+</body>
+</html>
