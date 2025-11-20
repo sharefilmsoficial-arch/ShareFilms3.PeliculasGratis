@@ -301,7 +301,7 @@ const MOVIES = [
     rating: "PTV-G",
     genres: ["Animación", "Aventura","Infantil","Acción","Fantasía"],
     description:"Con motivo de la semana de la amistad franco-estadounidense, Marinette y su clase viajan a Nueva York: la ciudad de los superhéroes. Es la oportunidad para que Marinette pase tiempo con sus amigos.",
-    trailerUrl: sampleTrailer,
+    trailerUrl: "images/miraculous-paris.jpg",
     image: "images/miraculous-world3.jpg",
     movie: "https://drive.google.com/file/d/1Eh6czDWVDupIAlkClf5Ec1OSZcBgbxj0/preview"
   },
