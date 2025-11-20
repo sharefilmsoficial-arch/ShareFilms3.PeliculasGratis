@@ -313,7 +313,7 @@ const MOVIES = [
     rating: "TV-G",
     genres: ["Animación", "Aventura","Infantil","Acción","Fantasía"],
     description:"Marinette, ahora Chronobug, se une a Bunnyx para enfrentarse a un oponente misterioso que viaja en el tiempo...¡y que conoce la identidad secreta de Ladybug!",
-    trailerUrl: sampleTrailer,
+    trailerUrl: "images/miraculous-londres",
     image: "images/miraculous-world4.jpg",
     movie: "https://drive.google.com/file/d/1lj_1bQM62XxUqEG9_taRrZcnaGg9cldN/preview"
   },
