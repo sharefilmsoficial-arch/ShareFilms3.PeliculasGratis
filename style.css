@@ -22,8 +22,9 @@ body {
 }
 
 .logo {
-  font-weight: 700;
-  color: #58a6ff;
+  font-weight: 700; /*letra gruesa*/
+  color: #58a6ff; /*color por hexadecimal*/
+  font-size: 14px; /* <-- tamaño más chico */
 }
 
 #search {
