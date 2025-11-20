@@ -50,13 +50,32 @@ if(!movie){
 qs('#title').textContent = movie.title;
 qs('#meta').textContent = `${movie.year || ''} • ${movie.duration || ''} • ${movie.rating || ''}`;
 
-// 🎬 Imagen estática de fondo (sin tráiler)
+// 🎬 Fondo dinámico (acepta imagen o video)
 const hero = qs('#hero');
-if (movie.image) {
+const bgVideo = qs('#bgVideo');
+
+function isImage(url) {
+  return url.match(/\.(jpg|jpeg|png|webp|gif)$/i);
+}
+
+if (movie.trailerUrl && isImage(movie.trailerUrl)) {
+  // Usar imagen como fondo
+  bgVideo.style.display = "none";
+  hero.style.backgroundImage = `url(${movie.trailerUrl})`;
+  hero.style.backgroundSize = "cover";
+  hero.style.backgroundPosition = "center";
+} 
+else if (movie.trailerUrl) {
+  // Usar video como siempre
+  bgVideo.src = movie.trailerUrl;
+} 
+else if (movie.image) {
+  // Imagen fallback
   hero.style.backgroundImage = `url(${movie.image})`;
   hero.style.backgroundSize = "cover";
   hero.style.backgroundPosition = "center";
-} else {
+} 
+else {
   hero.classList.add('no-video');
 }
 // 🔇 Botón de mute/unmute
