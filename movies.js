@@ -61,7 +61,7 @@ const MOVIES = [
     description:  "Un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad mientras la Tierra agoniza.",
     trailerUrl: sampleTrailer,
     image: "https://apeiros173.github.io/ShareFilms-Peliculas-Gratis/interestelar.jpeg",
-    movie: "https://drive.google.com/file/d/1cVVPgzsRjlombZxDsP2YWa9F9cHs0xa7/preview"
+    movie: "https://drive.google.com/file/d/1iESvmJew9Qftd_5iLozVhRFIK-TXfzY6/preview"
   },
   {
     id: "karatekid1984",
